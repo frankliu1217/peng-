@@ -1,0 +1,48 @@
+---
+title: "H24101256"
+date: today
+author: chen-fu LIU
+format:
+ pdf:
+    include-in-header:
+      - text: |
+         \usepackage{setspace,relsize}
+mainfont: "PingFang TC"
+toc: true
+---
+
+```{r}
+
+#install.packages("palmerpenguins")
+library(palmerpenguins)
+head(penguins_raw)
+```
+
+# Summary Staistic
+
+```{r}
+#| output: asis
+library(Hmisc)
+latex(describe(penguins_raw), file = "", caption.placement = "top")
+```
+
+中文
+
+# Table 1
+
+```{r}
+#| warning: false
+library(table1)
+str(penguins_raw)
+penguins_raw <- penguins_raw
+table1(~ Species+`Culmen Length (mm)`+`Culmen Depth (mm)`+`Body Mass (g)`+`Delta 15 N (o/oo)`| Island, data=penguins_raw)
+# help(table1)
+```
+
+# Missing Values
+
+```{r}
+library(DataExplorer)
+
+plot_missing(penguins_raw)
+```
